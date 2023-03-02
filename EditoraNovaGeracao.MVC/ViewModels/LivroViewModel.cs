@@ -27,7 +27,10 @@ namespace EditoraNovaGeracao.MVC.ViewModels
         public decimal Preco { get; set; }
 
         public Guid CategoriaId { get; set; }
+        public virtual CategoriaViewModel Categoria { get; set; }
+
         public Guid FornecedorId { get; set; }
+        public virtual FornecedorViewModel Fornecedor { get; set; }
 
         public virtual IEnumerable<EstoqueViewModel> Estoques { get; set; }
     }

@@ -12,5 +12,6 @@ namespace EditoraNovaGeracao.MVC.ViewModels
         public int Quantidade { get; set; }
 
         public Guid LivroId { get; set; }
+        public virtual LivroViewModel Livro { get; set; }
     }
 }

@@ -12,7 +12,10 @@ namespace EditoraNovaGeracao.Domain.Entities
         public decimal Preco { get; set; }
 
         public Guid CategoriaId { get; set; }
+        public virtual Categoria Categoria { get; set; }
+
         public Guid FornecedorId { get; set; }
+        public virtual Fornecedor Fornecedor { get; set; }
 
         public virtual IEnumerable<Estoque> Estoques { get; set; }
     }
