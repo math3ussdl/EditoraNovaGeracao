@@ -166,6 +166,7 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\loader.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -212,6 +213,12 @@
     <Content Include="Views\Estoques\Delete.cshtml" />
     <Content Include="Views\Fornecedores\Delete.cshtml" />
     <Content Include="Views\Livros\Delete.cshtml" />
+    <Content Include="Views\Estoques\Details.cshtml" />
+    <Content Include="Views\Fornecedores\Details.cshtml" />
+    <Content Include="Views\Livros\Details.cshtml" />
+    <Content Include="Views\Estoques\Edit.cshtml" />
+    <Content Include="Views\Fornecedores\Edit.cshtml" />
+    <Content Include="Views\Livros\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,6 +13,10 @@ namespace EditoraNovaGeracao.Infrastructure.Data.EntityConfig
                 .IsRequired()
                 .HasMaxLength(120);
 
+            Property(l => l.Descricao)
+                .IsRequired()
+                .HasMaxLength(500);
+
             Property(l => l.Autor)
                 .HasMaxLength(60);
 

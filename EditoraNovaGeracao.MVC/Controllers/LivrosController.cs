@@ -47,6 +47,7 @@ namespace EditoraNovaGeracao.MVC.Controllers
         {
             ViewBag.CategoriaId = new SelectList(_categoriaApp.GetAll(), "Id", "Nome");
             ViewBag.FornecedorId = new SelectList(_fornecedorApp.GetAll(), "Id", "Nome");
+
             return View();
         }
 

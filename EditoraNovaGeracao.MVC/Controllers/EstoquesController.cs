@@ -11,10 +11,12 @@ namespace EditoraNovaGeracao.MVC.Controllers
     public class EstoquesController : Controller
     {
         private readonly IEstoqueAppService _estoqueApp;
+        private readonly ILivroAppService _livroApp;
 
-        public EstoquesController(IEstoqueAppService service)
+        public EstoquesController(IEstoqueAppService service, ILivroAppService livroService)
         {
             _estoqueApp = service;
+            _livroApp = livroService;
         }
 
         private EstoqueViewModel GetViewModelById(Guid id)
@@ -38,6 +40,8 @@ namespace EditoraNovaGeracao.MVC.Controllers
         // GET: Estoques/Create
         public ActionResult Create()
         {
+            ViewBag.LivroId = new SelectList(_livroApp.GetAll(), "Id", "Titulo");
+
             return View();
         }
 
@@ -51,13 +55,19 @@ namespace EditoraNovaGeracao.MVC.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.LivroId = new SelectList(_livroApp.GetAll(), "Id", "Titulo", estoque.LivroId);
+
             return View(estoque);
         }
 
         // GET: Estoques/Edit/<GUID>
         public ActionResult Edit(Guid id)
         {
-            return View(GetViewModelById(id));
+            var estoqueViewModel = GetViewModelById(id);
+
+            ViewBag.LivroId = new SelectList(_livroApp.GetAll(), "Id", "Titulo", estoqueViewModel.LivroId);
+
+            return View(estoqueViewModel);
         }
 
         // POST: Estoques/Edit/<GUID>
@@ -69,6 +79,8 @@ namespace EditoraNovaGeracao.MVC.Controllers
                 _estoqueApp.Update(Mapper.Map<EstoqueViewModel, Estoque>(estoque));
                 return RedirectToAction("Index");
             }
+
+            ViewBag.LivroId = new SelectList(_livroApp.GetAll(), "Id", "Titulo", estoque.LivroId);
 
             return View(estoque);
         }

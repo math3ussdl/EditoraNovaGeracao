@@ -1,10 +1,10 @@
 ﻿@model EditoraNovaGeracao.MVC.ViewModels.EstoqueViewModel
 
 @{
-    ViewBag.Title = "Cadastrar estoque";
+    ViewBag.Title = "Editar estoque";
 }
 
-<h2>Cadastrar novo registro de estoque</h2>
+<h2>Editar estoque do livro @Model.Livro.Titulo</h2>
 
 
 @using (Html.BeginForm())
@@ -14,6 +14,8 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
         <div class="form-group">
             @Html.LabelFor(model => model.Quantidade, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -25,14 +27,14 @@
         <div class="form-group">
             @Html.Label("Livro", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("LivroId", String.Empty)
+                @Html.DropDownList("LivroId", string.Empty)
                 @Html.ValidationMessageFor(model => model.LivroId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Cadastrar" class="btn btn-success" />
+                <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </div>
     </div>

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace EditoraNovaGeracao.Infrastructure.Data.Repositories.Common
 {
-    public class RepositoryBase<TEntity, TId> : IDisposable, IResourcesCommunicationBase<TEntity, TId>
+    public class RepositoryBase<TEntity, TId> : IDisposable, IRepositoryCommunication<TEntity, TId>
         where TEntity : class
         where TId : struct
     {

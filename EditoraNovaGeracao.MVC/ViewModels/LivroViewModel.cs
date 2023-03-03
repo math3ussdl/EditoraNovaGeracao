@@ -13,6 +13,11 @@ namespace EditoraNovaGeracao.MVC.ViewModels
         [MinLength(2, ErrorMessage = "Mínimo {0} caracteres!")]
         public string Titulo { get; set; }
 
+        [Required(ErrorMessage = "Preencha o campo 'DESCRIÇÃO'!")]
+        [MaxLength(500, ErrorMessage = "Máximo {0} caracteres!")]
+        [MinLength(6, ErrorMessage = "Mínimo {0} caracteres!")]
+        public string Descricao { get; set; }
+
         [Required(ErrorMessage = "Preencha o campo 'AUTOR'!")]
         [MaxLength(60, ErrorMessage = "Máximo {0} caracteres!")]
         [MinLength(2, ErrorMessage = "Mínimo {0} caracteres!")]
@@ -26,9 +31,11 @@ namespace EditoraNovaGeracao.MVC.ViewModels
         [DisplayName("Preço")]
         public decimal Preco { get; set; }
 
+        [DisplayName("Categoria")]
         public Guid CategoriaId { get; set; }
         public virtual CategoriaViewModel Categoria { get; set; }
 
+        [DisplayName("Fornecedor")]
         public Guid FornecedorId { get; set; }
         public virtual FornecedorViewModel Fornecedor { get; set; }
 

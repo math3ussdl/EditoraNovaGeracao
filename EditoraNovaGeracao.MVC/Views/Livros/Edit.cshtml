@@ -1,20 +1,21 @@
 ﻿@model EditoraNovaGeracao.MVC.ViewModels.LivroViewModel
 
 @{
-    ViewBag.Title = "Cadastrar livro";
+    ViewBag.Title = "Editar livro";
 }
 
-@Styles.Render("~/Content/loader.css")
+<h2>Editar o livro @Model.Titulo</h2>
 
-<h2>Cadastrar novo livro</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
         <div class="form-group">
             @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -26,16 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Descricao, htmlAttributes: new { @class = "form-control", @Id = "description", @rows = "3" })
-
-                <button
-                        class="btn btn-primary recording"
-                        type="button"
-                        style="margin-top: 1rem;">
-
-                    <i class="glyphicon glyphicon-record"></i>
-                    Descreva o livro
-                </button>
+                @Html.EditorFor(model => model.Descricao, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Descricao, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -67,7 +59,7 @@
         <div class="form-group">
             @Html.Label("Categoria", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("CategoriaId", string.Empty)
+                @Html.DropDownList("CategoriaId", String.Empty)
                 @Html.ValidationMessageFor(model => model.CategoriaId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -82,43 +74,11 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Cadastrar" class="btn btn-success" />
+                <input type="submit" value="Salvar" class="btn btn-success" />
             </div>
         </div>
     </div>
 }
-
-<!-- modal -->
-<div
-     class="modal fade"
-     id="recordingModal"
-     tabindex="-1"
-     aria-labelledby="recordingModalLabel"
-     aria-hidden="true"
-     role="dialog">
-
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="recordingModalLabel">Gravando áudio</h1>
-            </div>
-            <div class="modal-body d-flex flex-column align-items-center">
-                <div class="lds-facebook">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-                <span id="recognition-status"></span>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger dismiss">
-                    <i class="glyphicon glyphicon-stop"></i>
-                    Parar gravação
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <div>
     @Html.ActionLink("Voltar à listagem", "Index")
@@ -126,42 +86,4 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script>
-        let SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        let recognition = new SpeechRecognition();
-
-        recognition.onstart = function () {
-            $('span#recognition-status').text('Pode falar... já consigo te ouvir!');
-        }
-
-        recognition.onspeechend = function () {
-            $('span#recognition-status').text('Fique tranquilo... estou processando o que você me disse!');
-        }
-
-        recognition.onerror = function (event) {
-            if (event.error == 'no-speech') {
-                $('span#recognition-status').text('Não consegui te entender!');
-            };
-        }
-
-        recognition.onresult = function (event) {
-            var current = event.resultIndex;
-            var transcript = event.results[current][0].transcript;
-
-            $('textarea#description').val(transcript);
-            $("#recordingModal").modal("toggle");
-        }
-
-        $(function () {
-            $(".recording").click(function () {
-                $("#recordingModal").modal();
-                recognition.start();
-            });
-
-            $(".dismiss").click(function () {
-                $("#recordingModal").modal("toggle");
-                recognition.stop();
-            });
-        });
-    </script>
 }
